@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     
     'api',
     'django_extensions',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
