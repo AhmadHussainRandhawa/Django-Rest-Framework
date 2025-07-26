@@ -29,13 +29,13 @@ class Order(models.Model):
     order_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     products = models.ManyToManyField(Product, through='OrderItem', related_name='orders')
-    created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(
         max_length=10, choices=StatusChoices.choices, default=StatusChoices.PENDING)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         username = self.user.username if self.user else 'Guest'
-        return f"{username} placed that order"
+        return f"{username}"
 
 
 class OrderItem(models.Model):
