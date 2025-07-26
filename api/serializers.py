@@ -50,5 +50,8 @@ class OrderSerializer(serializers.ModelSerializer):
             ]
 
 
-
-        
+class ProductInfoSerializer(serializers.Serializer):
+    '''Generic Serializer to show products, count, and max_price by subclassing productserializer'''
+    products = ProductSerializer(many=True)
+    count = serializers.IntegerField()
+    max_price = serializers.FloatField()
