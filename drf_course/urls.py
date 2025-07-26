@@ -5,7 +5,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('api.urls', namespace='api'))
+    path('', include('api.urls', namespace='api')),
+    path('silk/', include('silk.urls', namespace='silk') ),
 ]
 
 if settings.DEBUG:
