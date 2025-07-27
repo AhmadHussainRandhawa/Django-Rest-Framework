@@ -40,3 +40,34 @@ Content-Type: application/json
 
 
 
+
+### ProductInfoApiView (RetrieveUpdateDestroyAPIView)
+
+GET http://127.0.0.1:8000/products/5 HTTP/1.1
+
+###
+
+PATCH http://127.0.0.1:8000/products/5 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzNjIxNTU2LCJpYXQiOjE3NTM2MjEyNTYsImp0aSI6IjI5YWUzYTNkMDgwYjRjY2JhNmRkZGUxYTc2NTg1NjIxIiwidXNlcl9pZCI6IjEifQ.W080fhHE7KbTFGv0DO1KFt-r2qcHQIXnkKNqfIADmmc
+
+{
+    "name": "testing"
+}
+
+###
+
+PUT http://127.0.0.1:8000/products/4 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzNjIxNTU2LCJpYXQiOjE3NTM2MjEyNTYsImp0aSI6IjI5YWUzYTNkMDgwYjRjY2JhNmRkZGUxYTc2NTg1NjIxIiwidXNlcl9pZCI6IjEifQ.W080fhHE7KbTFGv0DO1KFt-r2qcHQIXnkKNqfIADmmc
+
+{
+    "name": "Putting test",
+    "description": "blah blah blah",
+    "price": 44,
+    "stock": "3"
+}
+
+###
+
+DELETE  http://127.0.0.1:8000/products/1 HTTP/1.1
