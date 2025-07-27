@@ -1,0 +1,15 @@
+GET http://127.0.0.1:8000/products HTTP/1.1
+
+
+###
+
+
+POST http://127.0.0.1:8000/products/ 
+Content-Type: application/json
+
+{
+    "name": "Table",
+    "description": "4 legs it has",
+    "price": "3000.50",
+    "stock": "34"
+}
