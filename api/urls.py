@@ -15,5 +15,4 @@ urlpatterns = [
     path('orders/', OrderListApiView.as_view(), name='orders'),
     path('user-orders/', UserOrderListApiView.as_view(), name='user_orders'),
     path('products/info', ProductInfoApiView.as_view(), name='product_info'),
-
 ]
