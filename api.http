@@ -1,11 +1,10 @@
 GET http://127.0.0.1:8000/products HTTP/1.1
 
-
 ###
 
-
-POST http://127.0.0.1:8000/products/ 
+POST http://127.0.0.1:8000/products/ HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzNjE2MzEzLCJpYXQiOjE3NTM2MTYwMTMsImp0aSI6Ijg0NmIyM2NjZDEyNzQ1YjM4MDg2Yzk3ZDlhZjRkN2E1IiwidXNlcl9pZCI6IjEifQ.X4FcARGS74wLtP2uLX-3jWhi77t2JzoiygkcP30PG0k
 
 {
     "name": "Table",
@@ -13,3 +12,31 @@ Content-Type: application/json
     "price": "3000.50",
     "stock": "34"
 }
+
+###
+
+POST http://127.0.0.1:8000/api/token/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "test"
+}
+
+
+###
+
+GET http://127.0.0.1:8000/user-orders/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzNjE1MTEwLCJpYXQiOjE3NTM2MTQ4MTAsImp0aSI6ImVhMmQ2MDVlOWE2ZDQ3ZmRiMTI3YWU5ZGZhNzViYjJhIiwidXNlcl9pZCI6IjIifQ.FAW75-MiJHZmViHIuwAOr06ct9xEtiukoDtS78C4AMo
+
+###
+
+POST http://127.0.0.1:8000/api/token/refresh/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MzcwMTg2NCwiaWF0IjoxNzUzNjE1NDY0LCJqdGkiOiJlYjMxNjljN2NlZWE0NjNlODZhN2I1N2E4OTc0OTRhNiIsInVzZXJfaWQiOiIxIn0.m_btNZ2EZ8GLi918pkvrHRhw7WSkvA1IZxJeabHK9_k"
+}
+
+
+

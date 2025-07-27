@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Order, OrderItem
+from .models import Product, Order, OrderItem, User
 
 
 # User TabularInline when you want to include child table in parent
@@ -13,4 +13,5 @@ class OrderAdmin(admin.ModelAdmin):
 
 admin.site.register(Product)
 admin.site.register(Order, OrderAdmin)
+admin.site.register(User)
 
