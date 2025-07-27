@@ -8,9 +8,22 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 
 
+class ProductListCreateApiView(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+'''      # ListCreateApiView is a mixture of List and Create Api view.
+
 class ProductListApiView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+
+class ProductCreateApiView(generics.CreateAPIView):
+    model = Product
+    serializer_class = ProductSerializer
+'''
 
 
 class ProductDetailApiView(generics.RetrieveAPIView):
