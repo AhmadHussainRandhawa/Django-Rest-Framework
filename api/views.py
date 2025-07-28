@@ -10,6 +10,7 @@ from .filters import ProductFilters, InStockFilterBackend
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
+from rest_framework import viewsets
 
 
 class ProductListCreateApiView(generics.ListCreateAPIView):
@@ -31,7 +32,6 @@ class ProductListCreateApiView(generics.ListCreateAPIView):
     pagination_class.page_query_param = 'page_num'
     pagination_class.page_size_query_param = 'size'
     pagination_class.max_page_size = 5
-
 
 
     def get_permissions(self):
@@ -66,21 +66,6 @@ class ProductDetailApiView(generics.RetrieveUpdateDestroyAPIView):
         return super().get_permissions()
 
 
-class OrderListApiView(generics.ListAPIView):
-    queryset = Order.objects.select_related('user').prefetch_related('items', 'items__product').all()
-    serializer_class = OrderSerializer
-
-
-class UserOrderListApiView(generics.ListAPIView):
-    serializer_class = OrderSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return Order.objects.select_related('user')\
-            .prefetch_related('items', 'items__product').all()\
-            .filter(user=self.request.user)
-
-
 class ProductInfoApiView(APIView):
     def get(self, request):
         products = Product.objects.all()
@@ -90,6 +75,12 @@ class ProductInfoApiView(APIView):
             'max_price': products.aggregate(max_price=Max('price'))['max_price'],
         })
         return Response(data=serializer.data)
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.select_related('user').prefetch_related('items', 'items__product').all()
+    serializer_class = OrderSerializer
+    permission_classes = [AllowAny]
 
 
 '''               # Function Base Views
