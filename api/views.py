@@ -1,12 +1,12 @@
 from .models import Product, Order, OrderItem
 from .serializers import ProductSerializer, OrderSerializer, ProductInfoSerializer
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from django.db.models import Max
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.views import APIView
-from .filters import ProductFilters, InStockFilterBackend
+from .filters import ProductFilters, InStockFilterBackend, OrderFilters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
@@ -81,6 +81,15 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.select_related('user').prefetch_related('items', 'items__product').all()
     serializer_class = OrderSerializer
     permission_classes = [AllowAny]
+    pagination_class = None
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = OrderFilters
+
+    @action(detail=False, methods=['get'], url_path='user-orders', permission_classes=[IsAuthenticated])
+    def user_orders(self, request):
+        orders = self.get_queryset().filter(user=self.request.user)
+        serializers = self.get_serializer(orders, many=True)
+        return Response(serializers.data)
 
 
 '''               # Function Base Views

@@ -29,7 +29,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
             'product_price', 
             'quantity',
             'item_subtotal',
-            ]
+        ]
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -49,7 +49,7 @@ class OrderSerializer(serializers.ModelSerializer):
             'status', 
             'items', 
             'total_price'
-            ]
+        ]
 
 
 class ProductInfoSerializer(serializers.Serializer):
