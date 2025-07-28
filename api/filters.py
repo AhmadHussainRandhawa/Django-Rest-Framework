@@ -1,5 +1,6 @@
 import django_filters
 from .models import Product
+from rest_framework import filters
 
 
 class ProductFilters(django_filters.FilterSet):
@@ -8,4 +9,9 @@ class ProductFilters(django_filters.FilterSet):
         fields = {
             'name': ['iexact', 'icontains'],
             'price': ['lt', 'gt', 'range']            
-            }
+        }
+
+
+class InStockFilterBackend(filters.BaseFilterBackend):
+    def filter_queryset(self, request, queryset, view):
+        return queryset.filters(stock__gt=0)
