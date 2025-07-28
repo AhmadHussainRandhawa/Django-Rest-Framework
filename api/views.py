@@ -80,16 +80,25 @@ class ProductInfoApiView(APIView):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.select_related('user').prefetch_related('items', 'items__product').all()
     serializer_class = OrderSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     pagination_class = None
     filter_backends = [DjangoFilterBackend]
     filterset_class = OrderFilters
 
-    @action(detail=False, methods=['get'], url_path='user-orders', permission_classes=[IsAuthenticated])
-    def user_orders(self, request):
-        orders = self.get_queryset().filter(user=self.request.user)
-        serializers = self.get_serializer(orders, many=True)
-        return Response(serializers.data)
+    def get_queryset(self):
+        qs = super().get_queryset()
+        if not self.request.user.is_staff:
+            qs = qs.filter(user=self.request.user)
+        return qs
+                
+            
+        
+
+    # @action(detail=False, methods=['get'], url_path='user-orders', permission_classes=[IsAuthenticated])
+    # def user_orders(self, request):
+    #     orders = self.get_queryset().filter(user=self.request.user)
+    #     serializers = self.get_serializer(orders, many=True)
+    #     return Response(serializers.data)
 
 
 '''               # Function Base Views
