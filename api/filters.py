@@ -14,4 +14,4 @@ class ProductFilters(django_filters.FilterSet):
 
 class InStockFilterBackend(filters.BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
-        return queryset.filters(stock__gt=0)
+        return queryset.filter(stock__gt=0)

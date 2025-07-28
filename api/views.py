@@ -9,10 +9,11 @@ from rest_framework.views import APIView
 from .filters import ProductFilters, InStockFilterBackend
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
 
 
 class ProductListCreateApiView(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
+    queryset = Product.objects.order_by('id')
     serializer_class = ProductSerializer
     filter_backends = [
         DjangoFilterBackend, 
@@ -23,6 +24,15 @@ class ProductListCreateApiView(generics.ListCreateAPIView):
     filterset_class = ProductFilters
     search_fields = ['=name', 'description']
     ordering_fields = ['name', 'price', 'stock']
+
+    # LimitOffsetPagination OR
+    pagination_class = PageNumberPagination
+    pagination_class.page_size = 3
+    pagination_class.page_query_param = 'page_num'
+    pagination_class.page_size_query_param = 'size'
+    pagination_class.max_page_size = 5
+
+
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
