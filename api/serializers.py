@@ -62,6 +62,7 @@ class OrderItemWriteSerializer(serializers.ModelSerializer):
 class OrderWriteSerializer(serializers.ModelSerializer):
     items = OrderItemWriteSerializer(many=True)
     order_id = serializers.UUIDField(read_only=True)
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
 
     def create(self, validated_data):
         order_items = validated_data.pop('items')

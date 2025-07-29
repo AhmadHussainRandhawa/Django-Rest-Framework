@@ -102,10 +102,10 @@ class OrderViewSet(viewsets.ModelViewSet):
             return OrderWriteSerializer
         return super().get_serializer_class()
 
-    
-                
-            
-        
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
 
     # @action(detail=False, methods=['get'], url_path='user-orders', permission_classes=[IsAuthenticated])
     # def user_orders(self, request):

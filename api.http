@@ -76,10 +76,9 @@ DELETE  http://127.0.0.1:8000/products/1 HTTP/1.1
 
 POST http://127.0.0.1:8000/orders/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzNzY2NjMzLCJpYXQiOjE3NTM3NjYzMzMsImp0aSI6IjI3ZWUxZjhkN2VjYTQxOThhNDg4NTU3ZTk5NjZjNDg0IiwidXNlcl9pZCI6IjEifQ.4s1WyNA3nzNc2yX-sFBaDlO_cqyT0pN3GwufwzqUvhQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzNzcyNDM3LCJpYXQiOjE3NTM3NzIxMzcsImp0aSI6IjkxZTkxNWM1ODgzZjRmZDk4MGU2ZTVkNzUzODU0YWI0IiwidXNlcl9pZCI6IjEifQ.7OhNNbqV-4lldTMBcHTLTpeXwkyveN_aFZy9ukj4yGE
 
-{ 
-    "user": 1,
+{
     "status": "Pending",
     "items": [
         {
