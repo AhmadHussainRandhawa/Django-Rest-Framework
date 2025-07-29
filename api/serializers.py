@@ -1,5 +1,6 @@
 from .models import Product, Order, OrderItem
 from rest_framework import serializers
+from django.db import transaction
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -70,6 +71,19 @@ class OrderWriteSerializer(serializers.ModelSerializer):
         for item in order_items:
             OrderItem.objects.create(order=order,**item)
         return order
+
+    def update(self, instance, validated_data):
+        order_items = validated_data.pop('items', None)
+
+        with transaction.atomic():
+            # Update main Order fields using DRF's default logic
+            instance = super().update(instance, validated_data)
+
+            if order_items is not None:
+                instance.items.all().delete()
+                for item in order_items:
+                    OrderItem.objects.create(order=instance, **item)
+        return instance
 
     class Meta:
         model = Order

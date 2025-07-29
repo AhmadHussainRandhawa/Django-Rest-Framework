@@ -72,18 +72,24 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
 
 DELETE  http://127.0.0.1:8000/products/1 HTTP/1.1
 
+
+### ORDERS
+
+GET http://127.0.0.1:8000/orders/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzNzg2NTIwLCJpYXQiOjE3NTM3ODYyMjAsImp0aSI6IjBhZGYxNDFhMWM0ODQ0ODlhNzYzM2QxYWQxYTM2MDRlIiwidXNlcl9pZCI6IjEifQ.c-C2HQhTLD80qBNrPtRLJKghjWmFkB0-JadOykbRUFU
+
 ###
 
-POST http://127.0.0.1:8000/orders/ HTTP/1.1
+PUT http://127.0.0.1:8000/orders/012ba49e-a364-4fe0-8364-b19f89b2b15d/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzNzcyNDM3LCJpYXQiOjE3NTM3NzIxMzcsImp0aSI6IjkxZTkxNWM1ODgzZjRmZDk4MGU2ZTVkNzUzODU0YWI0IiwidXNlcl9pZCI6IjEifQ.7OhNNbqV-4lldTMBcHTLTpeXwkyveN_aFZy9ukj4yGE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzNzg2ODMyLCJpYXQiOjE3NTM3ODY1MzIsImp0aSI6IjMyNTcyM2JmNGY0ODRhMzA5MzgyYTE3MWI1MjRlMTRhIiwidXNlcl9pZCI6IjEifQ.xfaUxBCfVWJy7iMggJ3YUi41KGZdStuh4Gc0e2bo_IA
 
 {
-    "status": "Pending",
+    "status": "Cancelled",
     "items": [
         {
             "product": 2,
-            "quantity": 4
+            "quantity": 10
         },
         {
             "product": 4,
