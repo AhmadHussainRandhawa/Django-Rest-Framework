@@ -1,4 +1,4 @@
-from .models import Product, Order, OrderItem
+from .models import Product, Order, User
 from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from django.db.models import Max
@@ -14,7 +14,8 @@ from .serializers import (
     ProductSerializer, 
     OrderSerializer, 
     ProductInfoSerializer, 
-    OrderWriteSerializer
+    OrderWriteSerializer,
+    UserSerializer
     )
 
 
@@ -105,6 +106,10 @@ class OrderViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+
+class UserListApiView(generics.ListAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
 
 
     # @action(detail=False, methods=['get'], url_path='user-orders', permission_classes=[IsAuthenticated])

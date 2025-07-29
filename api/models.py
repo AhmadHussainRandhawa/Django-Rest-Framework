@@ -27,7 +27,7 @@ class Order(models.Model):
         CANCELLED = 'Cancelled'
 
     order_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
     products = models.ManyToManyField(Product, through='OrderItem', related_name='orders')
     status = models.CharField(
         max_length=10, choices=StatusChoices.choices, default=StatusChoices.PENDING)
