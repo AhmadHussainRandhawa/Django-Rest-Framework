@@ -1,5 +1,4 @@
 from .models import Product, Order, OrderItem
-from .serializers import ProductSerializer, OrderSerializer, ProductInfoSerializer
 from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from django.db.models import Max
@@ -11,6 +10,12 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
 from rest_framework import viewsets
+from .serializers import (
+    ProductSerializer, 
+    OrderSerializer, 
+    ProductInfoSerializer, 
+    OrderWriteSerializer
+    )
 
 
 class ProductListCreateApiView(generics.ListCreateAPIView):
@@ -90,6 +95,14 @@ class OrderViewSet(viewsets.ModelViewSet):
         if not self.request.user.is_staff:
             qs = qs.filter(user=self.request.user)
         return qs
+    
+    def get_serializer_class(self):
+        # can also handle, request.method == 'POST'
+        if self.action == 'create':
+            return OrderWriteSerializer
+        return super().get_serializer_class()
+
+    
                 
             
         
